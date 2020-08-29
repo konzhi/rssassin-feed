@@ -6,10 +6,7 @@ import requests
 CONFIG = {
     'url': 'https://www.calvertjournal.com/',
     'title': 'Calvert Journal'
-
 }
-
-
 
 # Create your views here.
 def index(request: HttpResponse):
@@ -63,10 +60,6 @@ def build_channel(rss: ET.Element, bs) -> ET.SubElement:
     return channel
 
 
-    return channel
-
-
 def fetch_page():
-    #FIXME replace with URL call
-    with open('/code/calvertjournal.html') as fp:
-        return BeautifulSoup(fp, 'html.parser')
+    res = requests.get(CONFIG['url'])
+    return BeautifulSoup(res.text, 'html.parser')
