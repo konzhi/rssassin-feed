@@ -10,8 +10,6 @@ CONFIG = {
 
 # Create your views here.
 def index(request: HttpResponse):
-
-    # res = requests.get(SITE_URL)
     bs = fetch_page()
     rss = ET.Element("rss")
     rss.set("version", "2.0")
