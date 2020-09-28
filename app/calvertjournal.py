@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from django.http import HttpResponse
 import xml.etree.ElementTree as ET
 import requests
 
@@ -9,7 +8,7 @@ CONFIG = {
 }
 
 # Create your views here.
-def index(request: HttpResponse):
+def index():
     bs = fetch_page()
     rss = ET.Element("rss")
     rss.set("version", "2.0")
@@ -17,7 +16,7 @@ def index(request: HttpResponse):
     channel = build_channel(rss, bs)
     build_items(channel, bs)
 
-    return HttpResponse(ET.tostring(rss), content_type='application/rss+xml')
+    return ET.tostring(rss)
 
 
 def build_items(channel: ET.SubElement, bs: BeautifulSoup):
